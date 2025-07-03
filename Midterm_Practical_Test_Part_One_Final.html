@@ -1,0 +1,1218 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="Midterm Practical Test – Part One">
+  <meta name="keywords" content="Midterm, Practical Test, Part One, Computer Science, Quiz, Decomposition, Pattern Recognition, Algorithm Design, Pseudocode, Flowcharts">  
+  <title>Midterm Practical Test – Part One</title>
+ <style>
+   body {
+    /* Base styles for the page */
+    font-family: 'Segoe UI', Arial, sans-serif; /* Prioritize Segoe UI, fall back to Arial */
+    max-width: 900px; /* Increased max-width for a slightly wider layout on larger screens */
+    margin: 0 auto; /* Center the content horizontally */
+    padding: 20px;
+    background: linear-gradient(to right top, #e0f2f7, #c1e4f4); /* Soft gradient background */
+    color: #333;
+    line-height: 1.6; /* Improved readability for paragraphs */
+    display: flex; /* Use flexbox for vertical centering on smaller content */
+    flex-direction: column;
+    min-height: 100vh; /* Ensure body takes full viewport height */
+    box-sizing: border-box; /* Include padding in element's total width and height */
+}
+
+/* Header and Introduction */
+#intro, #quizForm, #results {
+    background: #ffffff;
+    padding: 40px; /* More generous padding */
+    border-radius: 12px; /* Softer rounded corners */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* More pronounced shadow for depth */
+    margin-bottom: 30px; /* Space between sections */
+    flex-grow: 1; /* Allows quiz content to fill available space */
+}
+
+h1 {
+    /* Styling for the main quiz title */
+    color: #007bff; /* Vibrant blue for branding */
+    text-align: center;
+    font-size: 2.8em; /* Larger, more impactful title */
+    margin-bottom: 15px;
+    font-weight: 700; /* Bolder for prominence */
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.05); /* Subtle text shadow */
+}
+
+#intro p {
+    font-size: 1.1em;
+    color: #555;
+    margin-bottom: 25px;
+    line-height: 1.6;
+}
+
+#intro button {
+    background-color: #28a745; /* Green for "Start" button */
+    color: white;
+    border: none;
+    padding: 15px 30px; /* Larger click area */
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.2em;
+    font-weight: 700;
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth hover effects */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Shadow for button depth */
+}
+
+#intro button:hover {
+    background-color: #218838;
+    transform: translateY(-2px); /* Slight lift on hover */
+}
+
+/* Timer Styling */
+#timer {
+    font-size: 1.4em; /* Larger timer text */
+    font-weight: bold;
+    color: #e67e22; /* Warm orange for attention */
+    margin-bottom: 25px;
+    text-align: center;
+    background: #fff3cd; /* Light yellow background */
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: 1px solid #ffeeba;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+/* Section Headings (e.g., Decomposition) */
+h2 {
+    color: #007bff; /* Consistent blue with main title */
+    border-bottom: 2px solid #e0e0e0; /* Lighter, subtle border */
+    padding-bottom: 10px; /* More space below the heading */
+    margin-top: 40px; /* More space above section headings */
+    margin-bottom: 25px;
+    font-size: 1.8em; /* Slightly larger section titles */
+    font-weight: 600;
+}
+
+/* Question Cards */
+.question {
+    background: #f9fcff; /* Very light blue background for questions */
+    padding: 25px; /* Increased padding within question boxes */
+    margin-bottom: 20px;
+    border-radius: 10px; /* Slightly more rounded corners */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); /* Stronger, softer shadow */
+    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Hover effect */
+}
+
+.question:hover {
+    transform: translateY(-3px); /* Lift effect on hover */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12); /* Enhanced shadow on hover */
+}
+
+.question p {
+    font-size: 1.15em; /* Larger question text */
+    margin-bottom: 15px;
+    color: #333;
+    font-weight: 500; /* Medium boldness for question text */
+}
+
+/* Radio Button Labels (Options) */
+label {
+    display: flex; /* Use flexbox for alignment of radio and text */
+    align-items: center; /* Vertically align radio button and text */
+    background: #ffffff; /* White background for each option */
+    padding: 12px 18px; /* Generous padding for click area */
+    margin: 8px 0; /* Space between options */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.05em;
+    color: #444;
+    transition: all 0.2s ease; /* Smooth transitions for hover/focus */
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05); /* Subtle shadow for options */
+}
+
+label:hover {
+    background-color: #f0f8ff; /* Light blue on hover */
+    border-color: #a7d9ff; /* Brighter border on hover */
+}
+
+/* Style for the radio input itself */
+input[type="radio"] {
+    margin-right: 12px; /* Space between radio button and text */
+    transform: scale(1.2); /* Slightly larger radio buttons */
+    accent-color: #007bff; /* Modern highlight color for checked radios */
+}
+
+/* Highlight selected radio option */
+input[type="radio"]:checked + span { /* Targeting a span wrapping the text, if you add it */
+    color: #007bff;
+    font-weight: 600;
+}
+
+/* Submit Button */
+button[type="button"] { /* Target the specific submit button */
+    background-color: #007bff; /* Blue for the main action */
+    color: white;
+    border: none;
+    padding: 15px 35px; /* Large, prominent button */
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.3em; /* Larger font size */
+    font-weight: 700;
+    margin: 40px auto 20px auto; /* More margin for visual separation */
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15); /* Stronger shadow for main button */
+    display: block; /* Ensure it takes full width when needed by margin:auto */
+    width: fit-content; /* Adjust width to content */
+    min-width: 200px; /* Minimum width for the button */
+}
+
+button[type="button"]:hover {
+    background-color: #0056b3;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+}
+
+/* Results Area */
+#results {
+    background: #e9f5ff; /* Light blue background for results */
+    padding: 30px;
+    border-radius: 12px;
+    text-align: center;
+    font-size: 1.2em;
+    margin-top: 30px;
+    font-weight: 600;
+    color: #2c3e50;
+    border: 1px solid #d0e8f8; /* Subtle border */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    white-space: pre-wrap; /* Preserve line breaks from JS message */
+}
+
+#results strong {
+    color: #007bff; /* Highlight scores */
+}
+
+/* Footer (Teacher's Name) */
+h3 {
+    text-align: center;
+    color: #666;
+    font-size: 1em;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-weight: 400; /* Lighter font for less emphasis */
+}
+
+/* General quiz form paragraph */
+#quizForm > p {
+    text-align: center;
+    font-size: 1em;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 768px) {
+    body {
+        padding: 15px; /* Reduce padding on smaller screens */
+    }
+
+    #intro, #quizForm, #results {
+        padding: 25px; /* Reduce inner padding */
+    }
+
+    h1 {
+        font-size: 2.2em; /* Smaller title on mobile */
+    }
+
+    h2 {
+        font-size: 1.5em; /* Smaller section titles */
+        margin-top: 30px;
+        margin-bottom: 20px;
+    }
+
+    .question {
+        padding: 20px;
+    }
+
+    .question p {
+        font-size: 1.05em; /* Slightly smaller question text */
+    }
+
+    label {
+        font-size: 0.95em;
+        padding: 10px 15px;
+    }
+
+    button[type="button"], #intro button {
+        padding: 12px 25px;
+        font-size: 1.1em;
+        min-width: unset; /* Remove min-width constraint */
+        width: 80%; /* Allow buttons to scale on smaller screens */
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    #timer {
+        font-size: 1.2em;
+        padding: 8px 12px;
+    }
+
+    #results {
+        font-size: 1.1em;
+        padding: 25px;
+    }
+}
+/* CSS for selected option and feedback on submission */
+label.selected {
+    border-color: #007bff; /* Highlight selected but not yet checked */
+    background-color: #e9f5ff;
+    color: #0056b3;
+}
+
+label.correct {
+    background-color: #d4edda; /* Light green */
+    border-color: #28a745; /* Green */
+    color: #155724; /* Dark green */
+    font-weight: 600;
+}
+
+label.incorrect {
+    background-color: #f8d7da; /* Light red */
+    border-color: #dc3545; /* Red */
+    color: #721c24; /* Dark red */
+    font-weight: 600;
+}
+
+/* Style for the 'Try Again' button added to results */
+#results button {
+    background-color: #007bff; /* Blue */
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: 700;
+    margin-top: 20px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+#results button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+
+    #intro, #quizForm, #results {
+        padding: 15px;
+        border-radius: 8px; /* Even softer corners for very small screens */
+    }
+
+    h1 {
+        font-size: 1.8em;
+    }
+
+    h2 {
+        font-size: 1.3em;
+        margin-top: 20px;
+        margin-bottom: 15px;
+    }
+
+    .question {
+        padding: 15px;
+        border-radius: 8px;
+    }
+
+    .question p {
+        font-size: 1em;
+        margin-bottom: 10px;
+    }
+
+    label {
+        font-size: 0.9em;
+        padding: 10px;
+        margin: 6px 0;
+        border-radius: 6px;
+    }
+
+    input[type="radio"] {
+        margin-right: 8px;
+        transform: scale(1.1);
+    }
+
+    button[type="button"], #intro button {
+        padding: 10px 20px;
+        font-size: 1em;
+        width: 90%; /* Buttons take up more width */
+    }
+
+    #timer {
+        font-size: 1em;
+        padding: 5px 10px;
+    }
+
+    #results {
+        font-size: 1em;
+        padding: 15px;
+    }
+}
+
+  </style>
+</head>
+<body>
+  <h3>Teacher: Mr. Theophilus AYEPEH</h3>
+  <div id="timer" style="font-size: 18px; font-weight: bold; color: #d35400; margin-bottom: 20px;">⏱️ Time Remaining: 10:00</div>
+
+  <div id="intro" style="text-align: center; margin-top: 40px;">
+  <h1>Midterm Practical Test – Part One</h1>
+  <p>👨‍🏫 Teacher: Mr. Theophilus AYEPEH</p>
+  <p>You have 10 minutes to finish. Click below to begin.</p>
+  <button onclick="beginQuiz()" style="padding: 10px 20px; font-size: 16px;">Start Quiz</button>
+</div>
+
+<div id="timer" style="font-size: 18px; font-weight: bold; color: #d35400; margin-bottom: 20px; display: none;">
+  ⏱️ Time Remaining: 10:00
+</div>
+
+<form id="quizForm" style="display: none;">
+
+  <p>Please choose the best answer for each question. When done, click <strong>Submit</strong> to see your score.</p>
+  <form id="quizForm">
+<h2>Decomposition</h2>
+<div class="question">
+<p>1. What is the most effective first step in decomposition when organizing a school fundraiser?</p>
+<label><input type="radio" name="q1" value="A"> A. Design a poster</label><br>
+<label><input type="radio" name="q1" value="B"> B. Ask teachers to promote it</label><br>
+<label><input type="radio" name="q1" value="C"> C. Break the event into smaller, manageable tasks</label><br>
+<label><input type="radio" name="q1" value="D"> D. Collect money from students</label><br>
+</div>
+<div class="question">
+<p>2. Which is NOT part of decomposing a birthday party?</p>
+<label><input type="radio" name="q2" value="A"> A. Creating a guest list</label><br>
+<label><input type="radio" name="q2" value="B"> B. Deciding on a party theme</label><br>
+<label><input type="radio" name="q2" value="C"> C. Finding the nearest party supply store</label><br>
+<label><input type="radio" name="q2" value="D"> D. Ordering the cake</label><br>
+</div>
+<div class="question">
+<p>3. Decomposition primarily helps in:</p>
+<label><input type="radio" name="q3" value="A"> A. Making tasks more confusing and complex</label><br>
+<label><input type="radio" name="q3" value="B"> B. Breaking down large problems into manageable parts to understand and solve</label><br>
+<label><input type="radio" name="q3" value="C"> C. Ignoring small, critical details</label><br>
+<label><input type="radio" name="q3" value="D"> D. Making random guesses about solutions</label><br>
+</div>
+<div class="question">
+<p>4. Which task clearly comes from effective decomposition when planning a class trip?</p>
+<label><input type="radio" name="q4" value="A"> A. Designing the bus's exterior</label><br>
+<label><input type="radio" name="q4" value="B"> B. Listing students and their dietary restrictions</label><br>
+<label><input type="radio" name="q4" value="C"> C. Recognizing travel trends</label><br>
+<label><input type="radio" name="q4" value="D"> D. Creating one broad solution</label><br>
+</div>
+<div class="question">
+<p>5. What makes decomposition helpful in programming and daily life?</p>
+<label><input type="radio" name="q5" value="A"> A. Delays solution</label><br>
+<label><input type="radio" name="q5" value="B"> B. Removes creativity</label><br>
+<label><input type="radio" name="q5" value="C"> C. Simplifies complex tasks</label><br>
+<label><input type="radio" name="q5" value="D"> D. Adds confusion</label><br>
+</div>
+<div class="question">
+<p>6. Best example of decomposition in cooking a multi-course dinner?</p>
+<label><input type="radio" name="q6" value="A"> A. Mix everything randomly</label><br>
+<label><input type="radio" name="q6" value="B"> B. List ingredients, prep each dish</label><br>
+<label><input type="radio" name="q6" value="C"> C. Order takeout</label><br>
+<label><input type="radio" name="q6" value="D"> D. Eat dessert first</label><br>
+</div>
+<div class="question">
+<p>7. How would decomposition be applied in a software project?</p>
+<label><input type="radio" name="q7" value="A"> A. Code all at once</label><br>
+<label><input type="radio" name="q7" value="B"> B. Divide into modules</label><br>
+<label><input type="radio" name="q7" value="C"> C. One person does everything</label><br>
+<label><input type="radio" name="q7" value="D"> D. Choose language last</label><br>
+</div>
+<div class="question">
+<p>8. Example of decomposition in writing a research paper?</p>
+<label><input type="radio" name="q8" value="A"> A. Pick a random topic</label><br>
+<label><input type="radio" name="q8" value="B"> B. Break into sections</label><br>
+<label><input type="radio" name="q8" value="C"> C. Write with no outline</label><br>
+<label><input type="radio" name="q8" value="D"> D. Focus on bibliography only</label><br>
+</div>
+<h2>Pattern Recognition</h2>
+<div class="question">
+<p>9. Which is an example of pattern recognition?</p>
+<label><input type="radio" name="q9" value="A"> A. List colors randomly</label><br>
+<label><input type="radio" name="q9" value="B"> B. Forget keys every Monday</label><br>
+<label><input type="radio" name="q9" value="C"> C. Press buttons randomly</label><br>
+<label><input type="radio" name="q9" value="D"> D. Draw without pattern</label><br>
+</div>
+<div class="question">
+<p>10. Which behavior uses pattern recognition in planning meals?</p>
+<label><input type="radio" name="q10" value="A"> A. Pick meals randomly</label><br>
+<label><input type="radio" name="q10" value="B"> B. Check friends’ meals</label><br>
+<label><input type="radio" name="q10" value="C"> C. Plan pasta on Fridays</label><br>
+<label><input type="radio" name="q10" value="D"> D. Ignore past choices</label><br>
+</div>
+<div class="question">
+<p>11. Pattern recognition primarily helps by:</p>
+<label><input type="radio" name="q11" value="A"> A. Avoiding repetition</label><br>
+<label><input type="radio" name="q11" value="B"> B. Creating random problems</label><br>
+<label><input type="radio" name="q11" value="C"> C. Finding repeated solutions/errors</label><br>
+<label><input type="radio" name="q11" value="D"> D. Making tasks harder</label><br>
+</div>
+<div class="question">
+<p>12. What is a benefit of pattern recognition in studying?</p>
+<label><input type="radio" name="q12" value="A"> A. Random topic selection</label><br>
+<label><input type="radio" name="q12" value="B"> B. Recognize common questions</label><br>
+<label><input type="radio" name="q12" value="C"> C. No study plan</label><br>
+<label><input type="radio" name="q12" value="D"> D. Ignore feedback</label><br>
+</div>
+<div class="question">
+<p>13. Which example shows pattern recognition in shopping?</p>
+<label><input type="radio" name="q13" value="A"> A. Buy closest item</label><br>
+<label><input type="radio" name="q13" value="B"> B. Discounts every Friday</label><br>
+<label><input type="radio" name="q13" value="C"> C. Forget list</label><br>
+<label><input type="radio" name="q13" value="D"> D. Choose first brand</label><br>
+</div>
+<div class="question">
+<p>14. In coding, pattern recognition is used to:</p>
+<label><input type="radio" name="q14" value="A"> A. Add bugs</label><br>
+<label><input type="radio" name="q14" value="B"> B. Optimize logic</label><br>
+<label><input type="radio" name="q14" value="C"> C. Confuse users</label><br>
+<label><input type="radio" name="q14" value="D"> D. Make longer code</label><br>
+</div>
+<div class="question">
+<p>15. A mechanic identifies problems by sound. This is:</p>
+<label><input type="radio" name="q15" value="A"> A. Guessing</label><br>
+<label><input type="radio" name="q15" value="B"> B. Pattern recognition</label><br>
+<label><input type="radio" name="q15" value="C"> C. Random troubleshooting</label><br>
+<label><input type="radio" name="q15" value="D"> D. Ignoring</label><br>
+</div>
+<div class="question">
+<p>16. Using a fertilizer and observing faster plant growth is:</p>
+<label><input type="radio" name="q16" value="A"> A. Luck</label><br>
+<label><input type="radio" name="q16" value="B"> B. Pattern recognition</label><br>
+<label><input type="radio" name="q16" value="C"> C. Ignoring data</label><br>
+<label><input type="radio" name="q16" value="D"> D. Wishing</label><br>
+</div>
+<h2>Algorithm Design</h2>
+<div class="question">
+<p>17. What is an algorithm?</p>
+<label><input type="radio" name="q17" value="A"> A. Random story</label><br>
+<label><input type="radio" name="q17" value="B"> B. Step-by-step instructions</label><br>
+<label><input type="radio" name="q17" value="C"> C. Guess</label><br>
+<label><input type="radio" name="q17" value="D"> D. Complex math problem</label><br>
+</div>
+<div class="question">
+<p>18. Essential part of cleaning room algorithm?</p>
+<label><input type="radio" name="q18" value="A"> A. Watch TV</label><br>
+<label><input type="radio" name="q18" value="B"> B. Pick up → Make bed → Vacuum → Organize</label><br>
+<label><input type="radio" name="q18" value="C"> C. Order pizza</label><br>
+<label><input type="radio" name="q18" value="D"> D. Open window</label><br>
+</div>
+<div class="question">
+<p>19. Ordering food online, which is correct sequence?</p>
+<label><input type="radio" name="q19" value="A"> A. Sleep</label><br>
+<label><input type="radio" name="q19" value="B"> B. Login → Choose → Checkout → Confirm</label><br>
+<label><input type="radio" name="q19" value="C"> C. Walk to store</label><br>
+<label><input type="radio" name="q19" value="D"> D. Ask pet</label><br>
+</div>
+<div class="question">
+<p>20. Which activity shows algorithmic thinking?</p>
+<label><input type="radio" name="q20" value="A"> A. Unordered to-do list</label><br>
+<label><input type="radio" name="q20" value="B"> B. Yell instructions</label><br>
+<label><input type="radio" name="q20" value="C"> C. Recipe with steps</label><br>
+<label><input type="radio" name="q20" value="D"> D. Copy friend</label><br>
+</div>
+<div class="question">
+<p>21. Why is a well-defined algorithm important?</p>
+<label><input type="radio" name="q21" value="A"> A. Adds confusion</label><br>
+<label><input type="radio" name="q21" value="B"> B. Wastes time</label><br>
+<label><input type="radio" name="q21" value="C"> C. Solves problems clearly</label><br>
+<label><input type="radio" name="q21" value="D"> D. Hides problem</label><br>
+</div>
+<div class="question">
+<p>22. Valid brushing teeth algorithm?</p>
+<label><input type="radio" name="q22" value="A"> A. Eat → Brush → Rinse</label><br>
+<label><input type="radio" name="q22" value="B"> B. Brush all surfaces for 2 mins</label><br>
+<label><input type="radio" name="q22" value="C"> C. Sleep before brushing</label><br>
+<label><input type="radio" name="q22" value="D"> D. Throw brush</label><br>
+</div>
+<div class="question">
+<p>23. Following furniture manual is:</p>
+<label><input type="radio" name="q23" value="A"> A. Trial and error</label><br>
+<label><input type="radio" name="q23" value="B"> B. Algorithm execution</label><br>
+<label><input type="radio" name="q23" value="C"> C. Guesswork</label><br>
+<label><input type="radio" name="q23" value="D"> D. Ignore instructions</label><br>
+</div>
+<div class="question">
+<p>24. Refining an algorithm is for:</p>
+<label><input type="radio" name="q24" value="A"> A. Add errors</label><br>
+<label><input type="radio" name="q24" value="B"> B. Add complexity</label><br>
+<label><input type="radio" name="q24" value="C"> C. Improve and simplify</label><br>
+<label><input type="radio" name="q24" value="D"> D. Confuse user</label><br>
+</div>
+<h2>Pseudocode</h2>
+<div class="question">
+<p>25. What is pseudocode?</p>
+<label><input type="radio" name="q25" value="A"> A. Programming language</label><br>
+<label><input type="radio" name="q25" value="B"> B. Made-up language</label><br>
+<label><input type="radio" name="q25" value="C"> C. Plain-language algorithm</label><br>
+<label><input type="radio" name="q25" value="D"> D. Secret code</label><br>
+</div>
+<div class="question">
+<p>26. Best pseudocode for grade calculation?</p>
+<label><input type="radio" name="q26" value="A"> A. Symbols</label><br>
+<label><input type="radio" name="q26" value="B"> B. Start → Get scores → Calc avg → If avg ≥ 60 → Pass</label><br>
+<label><input type="radio" name="q26" value="C"> C. Draw student</label><br>
+<label><input type="radio" name="q26" value="D"> D. Speak slang</label><br>
+</div>
+<div class="question">
+<p>27. Why use pseudocode first?</p>
+<label><input type="radio" name="q27" value="A"> A. Slows coding</label><br>
+<label><input type="radio" name="q27" value="B"> B. Skip testing</label><br>
+<label><input type="radio" name="q27" value="C"> C. Clarify logic</label><br>
+<label><input type="radio" name="q27" value="D"> D. Confuse others</label><br>
+</div>
+<div class="question">
+<p>28. What’s missing here? Start → Input num1 → Output result → End</p>
+<label><input type="radio" name="q28" value="A"> A. Joke</label><br>
+<label><input type="radio" name="q28" value="B"> B. Processing logic</label><br>
+<label><input type="radio" name="q28" value="C"> C. UI design</label><br>
+<label><input type="radio" name="q28" value="D"> D. Math proof</label><br>
+</div>
+<div class="question">
+<p>29. Pseudocode with a decision:</p>
+<label><input type="radio" name="q29" value="A"> A. Get value</label><br>
+<label><input type="radio" name="q29" value="B"> B. Print Hello</label><br>
+<label><input type="radio" name="q29" value="C"> C. If temp > 25 then print hot</label><br>
+<label><input type="radio" name="q29" value="D"> D. Add 5</label><br>
+</div>
+<div class="question">
+<p>30. Pseudocode should be:</p>
+<label><input type="radio" name="q30" value="A"> A. Complex syntax</label><br>
+<label><input type="radio" name="q30" value="B"> B. Clear and logical</label><br>
+<label><input type="radio" name="q30" value="C"> C. Poetic</label><br>
+<label><input type="radio" name="q30" value="D"> D. In foreign language</label><br>
+</div>
+<div class="question">
+<p>31. Loop example: LOOP WHILE count < 10</p>
+<label><input type="radio" name="q31" value="A"> A. Decision</label><br>
+<label><input type="radio" name="q31" value="B"> B. Input</label><br>
+<label><input type="radio" name="q31" value="C"> C. Loop</label><br>
+<label><input type="radio" name="q31" value="D"> D. Output</label><br>
+</div>
+<div class="question">
+<p>32. READ item_price, quantity is what type?</p>
+<label><input type="radio" name="q32" value="A"> A. Processing</label><br>
+<label><input type="radio" name="q32" value="B"> B. Output</label><br>
+<label><input type="radio" name="q32" value="C"> C. Input</label><br>
+<label><input type="radio" name="q32" value="D"> D. Decision</label><br>
+</div>
+<h2>Flowcharts</h2>
+<div class="question">
+<p>33. What does a diamond symbol mean in a flowchart?</p>
+<label><input type="radio" name="q33" value="A"> A. Joke</label><br>
+<label><input type="radio" name="q33" value="B"> B. Decision point</label><br>
+<label><input type="radio" name="q33" value="C"> C. Start/End</label><br>
+<label><input type="radio" name="q33" value="D"> D. Process</label><br>
+</div>
+<div class="question">
+<p>34. Why use flowcharts?</p>
+<label><input type="radio" name="q34" value="A"> A. Decoration</label><br>
+<label><input type="radio" name="q34" value="B"> B. Visualize logic</label><br>
+<label><input type="radio" name="q34" value="C"> C. Confuse others</label><br>
+<label><input type="radio" name="q34" value="D"> D. Cartoons</label><br>
+</div>
+<div class="question">
+<p>35. Symbol for Start/End?</p>
+<label><input type="radio" name="q35" value="A"> A. Circle</label><br>
+<label><input type="radio" name="q35" value="B"> B. Rectangle</label><br>
+<label><input type="radio" name="q35" value="C"> C. Oval</label><br>
+<label><input type="radio" name="q35" value="D"> D. Triangle</label><br>
+</div>
+<div class="question">
+<p>36. Best use of flowchart in life?</p>
+<label><input type="radio" name="q36" value="A"> A. Morning routine</label><br>
+<label><input type="radio" name="q36" value="B"> B. Read comics</label><br>
+<label><input type="radio" name="q36" value="C"> C. Selfies</label><br>
+<label><input type="radio" name="q36" value="D"> D. Watch movies</label><br>
+</div>
+<div class="question">
+<p>37. Symbol for 'Print Receipt'?</p>
+<label><input type="radio" name="q37" value="A"> A. Rectangle</label><br>
+<label><input type="radio" name="q37" value="B"> B. Diamond</label><br>
+<label><input type="radio" name="q37" value="C"> C. Oval</label><br>
+<label><input type="radio" name="q37" value="D"> D. Arrow</label><br>
+</div>
+<div class="question">
+<p>38. After 'Check eligibility', what next?</p>
+<label><input type="radio" name="q38" value="A"> A. Print banner</label><br>
+<label><input type="radio" name="q38" value="B"> B. IF yes → allow vote, else → deny</label><br>
+<label><input type="radio" name="q38" value="C"> C. Break</label><br>
+<label><input type="radio" name="q38" value="D"> D. Open menu</label><br>
+</div>
+<div class="question">
+<p>39. Arrow in flowchart means:</p>
+<label><input type="radio" name="q39" value="A"> A. Note</label><br>
+<label><input type="radio" name="q39" value="B"> B. Input</label><br>
+<label><input type="radio" name="q39" value="C"> C. Flow direction</label><br>
+<label><input type="radio" name="q39" value="D"> D. Calculation</label><br>
+</div>
+<div class="question">
+<p>40. Symbol for input operation like 'GET username'?</p>
+<label><input type="radio" name="q40" value="A"> A. Rectangle</label><br>
+<label><input type="radio" name="q40" value="B"> B. Parallelogram</label><br>
+<label><input type="radio" name="q40" value="C"> C. Diamond</label><br>
+<label><input type="radio" name="q40" value="D"> D. Oval</label><br>
+</div>
+
+    <button type="button" onclick="submitQuiz()">Submit</button>
+  </form>
+  <div id="results" style="margin-top: 20px; font-weight: bold;"></div>
+<script>
+    // Define the correct answers and their associated concepts
+    const QUIZ_DATA = {
+        'q1': { answer: 'C', concept: 'Decomposition', feedback: 'Decomposition is about breaking down a problem into smaller, manageable parts. The first step is always to identify these smaller tasks.' },
+        'q2': { answer: 'C', concept: 'Decomposition', feedback: 'Finding a store is a sub-task, not part of the initial decomposition of the party itself.' },
+        'q3': { answer: 'B', concept: 'Decomposition', feedback: 'Decomposition simplifies complex problems by breaking them into manageable parts.' },
+        'q4': { answer: 'B', concept: 'Decomposition', feedback: 'Listing specific details like dietary restrictions comes from breaking down the larger trip planning problem into concrete sub-tasks.' },
+        'q5': { answer: 'C', concept: 'Decomposition', feedback: 'Decomposition helps simplify complex tasks by making them smaller and more approachable.' },
+        'q6': { answer: 'B', concept: 'Decomposition', feedback: 'Decomposition involves breaking down the dinner into individual dishes and their preparation steps.' },
+        'q7': { answer: 'B', concept: 'Decomposition', feedback: 'Dividing a software project into modules is a classic example of decomposition in programming.' },
+        'q8': { answer: 'B', concept: 'Decomposition', feedback: 'Breaking a research paper into sections like intro, methods, results, and discussion is decomposition.' },
+        'q9': { answer: 'B', concept: 'Pattern Recognition', feedback: 'Remembering consistent events, even negative ones like forgetting keys, demonstrates identifying a pattern.' },
+        'q10': { answer: 'C', concept: 'Pattern Recognition', feedback: 'Planning specific meals on specific days based on past habits or preferences is pattern recognition.' },
+        'q11': { answer: 'C', concept: 'Pattern Recognition', feedback: 'Pattern recognition helps find similarities, repetitions, or trends, which can lead to repeated solutions or identifying common errors.' },
+        'q12': { answer: 'B', concept: 'Pattern Recognition', feedback: 'Recognizing common question types or frequent topics helps focus studying efforts.' },
+        'q13': { answer: 'B', concept: 'Pattern Recognition', feedback: 'Noticing that discounts consistently occur on a specific day is a form of pattern recognition.' },
+        'q14': { answer: 'B', concept: 'Pattern Recognition', feedback: 'In coding, recognizing repeated code structures or common problem types helps in optimizing logic and reusing solutions.' },
+        'q15': { answer: 'B', concept: 'Pattern Recognition', feedback: 'Experienced mechanics use their knowledge of how different car problems sound (patterns) to diagnose issues.' },
+        'q16': { answer: 'B', concept: 'Pattern Recognition', feedback: 'Observing a consistent outcome (faster growth) after a specific action (fertilizer) is recognizing a pattern of cause and effect.' },
+        'q17': { answer: 'B', concept: 'Algorithm Design', feedback: 'An algorithm is fundamentally a step-by-step set of instructions to solve a problem.' },
+        'q18': { answer: 'B', concept: 'Algorithm Design', feedback: 'An algorithm requires a clear, ordered sequence of steps to achieve a specific outcome.' },
+        'q19': { answer: 'B', concept: 'Algorithm Design', feedback: 'Ordering food online involves a precise, sequential algorithm of logging in, choosing, checking out, and confirming.' },
+        'q20': { answer: 'C', concept: 'Algorithm Design', feedback: 'A recipe is a perfect real-world example of an algorithm: a precise sequence of steps to produce a desired result.' },
+        'q21': { answer: 'C', concept: 'Algorithm Design', feedback: 'A well-defined algorithm ensures clarity and efficiency in problem-solving.' },
+        'q22': { answer: 'B', concept: 'Algorithm Design', feedback: 'An effective algorithm for brushing teeth would detail the action and its parameters (e.g., all surfaces, duration).' },
+        'q23': { answer: 'B', concept: 'Algorithm Design', feedback: 'Following a manual step-by-step to assemble furniture is executing a predefined algorithm.' },
+        'q24': { answer: 'C', concept: 'Algorithm Design', feedback: 'Refining an algorithm means making it more efficient, clearer, or simpler.' },
+        'q25': { answer: 'C', concept: 'Pseudocode', feedback: 'Pseudocode is an informal, high-level description of an algorithm that uses plain language and programming-like constructs.' },
+        'q26': { answer: 'B', concept: 'Pseudocode', feedback: 'Pseudocode outlines the logical steps without strict syntax, like getting scores, calculating, and then deciding pass/fail.' },
+        'q27': { answer: 'C', concept: 'Pseudocode', feedback: 'Using pseudocode helps clarify the logic and structure of a program before writing actual code.' },
+        'q28': { answer: 'B', concept: 'Pseudocode', feedback: 'An algorithm needs processing logic (e.g., a calculation, a decision) between input and output.' },
+        'q29': { answer: 'C', concept: 'Pseudocode', feedback: 'A decision in pseudocode is typically represented by an "IF...THEN...ELSE" structure.' },
+        'q30': { answer: 'B', concept: 'Pseudocode', feedback: 'Pseudocode is designed to be easily understood and to convey the algorithm\'s logic clearly.' },
+        'q31': { answer: 'C', concept: 'Pseudocode', feedback: 'Keywords like "LOOP WHILE" clearly indicate a repetitive block of code, which is a loop.' },
+        'q32': { answer: 'C', concept: 'Pseudocode', feedback: 'The "READ" command is used to get input from a user or system.' },
+        'q33': { answer: 'B', concept: 'Flowcharts', feedback: 'A diamond shape in a flowchart universally represents a decision point where the flow can take different paths.' },
+        'q34': { answer: 'B', concept: 'Flowcharts', feedback: 'Flowcharts are visual tools that graphically represent the steps and flow of an algorithm or process.' },
+        'q35': { answer: 'C', concept: 'Flowcharts', feedback: 'An oval (or rounded rectangle) symbol denotes the start or end point of a flowchart.' },
+        'q36': { answer: 'A', concept: 'Flowcharts', feedback: 'A morning routine is a series of sequential steps that can be easily mapped out in a flowchart.' },
+        'q37': { answer: 'A', concept: 'Flowcharts', feedback: 'A rectangle is the standard symbol for a process or action, such as "Print Receipt".' },
+        'q38': { answer: 'B', concept: 'Flowcharts', feedback: 'After a decision (like checking eligibility), the next step is typically a conditional action based on the decision\'s outcome.' },
+        'q39': { answer: 'C', concept: 'Flowcharts', feedback: 'Arrows (flow lines) in a flowchart indicate the direction of the process flow.' },
+        'q40': { answer: 'B', concept: 'Flowcharts', feedback: 'A parallelogram is the standard symbol used to represent input or output operations in a flowchart.' }
+    };
+
+    // Extract all concepts dynamically
+    const ALL_CONCEPTS = [...new Set(Object.values(QUIZ_DATA).map(data => data.concept))];
+    const TOTAL_QUESTIONS = Object.keys(QUIZ_DATA).length;
+    const QUIZ_DURATION_SECONDS = 10 * 60; // 10 minutes for the quiz itself
+    const REVIEW_DELAY_SECONDS = 40 * 60; // 40 minutes delay for answer review *after* quiz submission
+
+    let quizTimerInterval;
+    let reviewDelayTimerInterval; // Separate timer for the 40-minute delay
+    let timeRemainingForQuiz = QUIZ_DURATION_SECONDS;
+    let timeRemainingForReviewDelay = REVIEW_DELAY_SECONDS; // Tracks the 40-minute countdown
+
+    let currentAttempt = 1;
+
+    // userSelections will store the user's answers
+    let userSelections = {};
+    // Store the score of the *last submitted* attempt
+    let lastSubmittedScore = 0;
+
+    // Get references to DOM elements
+    const introSection = document.getElementById('intro');
+    const quizForm = document.getElementById('quizForm');
+    const timerDisplay = document.getElementById('timer');
+    const resultsDisplay = document.getElementById('results');
+    const startQuizButton = document.querySelector('#intro button');
+    const submitQuizButton = document.querySelector('#quizForm button[type="button"]');
+    const reviewAnswersButton = document.createElement('button');
+    reviewAnswersButton.textContent = "Review Answers";
+    reviewAnswersButton.classList.add('action-button');
+    reviewAnswersButton.style.display = 'none';
+
+    resultsDisplay.appendChild(reviewAnswersButton);
+    resultsDisplay.setAttribute('aria-live', 'polite');
+
+    // --- Helper for formatting time ---
+    function formatTime(totalSeconds) {
+        const minutes = Math.floor(totalSeconds / 60);
+        const seconds = totalSeconds % 60;
+        return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    }
+
+    // --- LocalStorage Functions ---
+
+    function saveProgress() {
+        const progress = {
+            userSelections: userSelections,
+            timeRemainingForQuiz: timeRemainingForQuiz,
+            timeRemainingForReviewDelay: timeRemainingForReviewDelay, // Save the review delay timer state
+            quizActive: quizForm.style.display === 'block', // Is the quiz form currently visible?
+            inReviewDelayPhase: resultsDisplay.style.display === 'block' && quizForm.style.display === 'none' && reviewAnswersButton.style.display === 'none', // Are we in the waiting state?
+            lastSubmittedScore: lastSubmittedScore, // Save the last submitted score
+            currentAttempt: currentAttempt // Save current attempt number
+        };
+        localStorage.setItem('quizProgress', JSON.stringify(progress));
+    }
+
+    function loadProgress() {
+        const savedProgress = localStorage.getItem('quizProgress');
+        if (savedProgress) {
+            const progress = JSON.parse(savedProgress);
+
+            userSelections = progress.userSelections || {};
+            timeRemainingForQuiz = progress.timeRemainingForQuiz || QUIZ_DURATION_SECONDS;
+            timeRemainingForReviewDelay = progress.timeRemainingForReviewDelay || REVIEW_DELAY_SECONDS;
+            lastSubmittedScore = progress.lastSubmittedScore || 0;
+            currentAttempt = progress.currentAttempt || 1;
+
+            // Restore UI state
+            if (progress.quizActive) {
+                // User was actively doing the quiz
+                introSection.style.display = 'none';
+                quizForm.style.display = 'block';
+                timerDisplay.style.display = 'block';
+                timerDisplay.innerText = `⏱️ Time Remaining: ${formatTime(timeRemainingForQuiz)}`; // Show quiz timer
+                startQuizTimer(); // Restart the quiz timer
+                // Re-populate user selections
+                for (const qName in userSelections) {
+                    const selectedValue = userSelections[qName];
+                    if (selectedValue) {
+                        const radio = document.querySelector(`input[name="${qName}"][value="${selectedValue}"]`);
+                        if (radio) {
+                            radio.checked = true;
+                            radio.closest('label').classList.add('selected');
+                        }
+                    }
+                }
+            } else if (progress.inReviewDelayPhase) {
+                // User was in the "waiting for review" state
+                introSection.style.display = 'none';
+                quizForm.style.display = 'none';
+                timerDisplay.style.display = 'block'; // Timer still shows review delay countdown
+                resultsDisplay.style.display = 'block';
+                resultsDisplay.dataset.score = lastSubmittedScore; // Restore score for display
+                startReviewDelayTimer(); // Start the 40-minute delay timer
+            } else {
+                // Default state if no specific active state found (e.g., was on intro page or review was done)
+                introSection.style.display = 'block';
+                quizForm.style.display = 'none';
+                timerDisplay.style.display = 'none';
+                resultsDisplay.style.display = 'none';
+            }
+            return true; // Progress loaded
+        }
+        return false; // No progress found
+    }
+
+    // --- Core Functions ---
+
+    function beginQuiz() {
+        // Clear any saved progress when a new quiz begins
+        localStorage.removeItem('quizProgress');
+        userSelections = {}; // Clear previous selections for a fresh start
+        lastSubmittedScore = 0; // Reset last score
+        currentAttempt = 1; // Reset attempt number
+
+        // Clear all selected radio buttons and remove any previous feedback styles for a clean start
+        document.querySelectorAll('input[type="radio"]').forEach(el => {
+            el.checked = false;
+            el.closest('label').classList.remove('correct', 'incorrect', 'selected');
+        });
+
+        introSection.style.display = 'none';
+        quizForm.style.display = 'block';
+        timerDisplay.style.display = 'block';
+        resultsDisplay.style.display = 'none';
+        reviewAnswersButton.style.display = 'none'; // Hide review button
+
+        timeRemainingForQuiz = QUIZ_DURATION_SECONDS; // Reset quiz timer for new attempt
+        timeRemainingForReviewDelay = REVIEW_DELAY_SECONDS; // Reset review delay timer
+
+        timerDisplay.innerText = `⏱️ Time Remaining: ${formatTime(timeRemainingForQuiz)}`; // Show quiz timer
+        startQuizTimer();
+    }
+
+    function startQuizTimer() {
+        clearInterval(quizTimerInterval);
+        quizTimerInterval = setInterval(() => {
+            timerDisplay.innerText = `⏱️ Time Remaining: ${formatTime(timeRemainingForQuiz)}`;
+
+            timeRemainingForQuiz--;
+            saveProgress(); // Save every second
+
+            if (timeRemainingForQuiz < 0) {
+                clearInterval(quizTimerInterval);
+                alert(`⏳ Time is up! Your quiz has been automatically submitted.`);
+                submitQuiz(true); // Auto-submit the quiz
+            }
+        }, 1000);
+    }
+
+    function startReviewDelayTimer() {
+        clearInterval(reviewDelayTimerInterval); // Clear any existing review delay timer
+        reviewAnswersButton.style.display = 'none'; // Hide review button initially
+
+        reviewDelayTimerInterval = setInterval(() => {
+            let message = `<p>Quiz submitted successfully!</p>
+                           <p>Your last score: <strong>${lastSubmittedScore}</strong> out of <strong>${TOTAL_QUESTIONS}</strong>.</p>`;
+
+            if (timeRemainingForReviewDelay > 0) {
+                message += `<p>Review answers available in: <strong>${formatTime(timeRemainingForReviewDelay)}</strong></p>`;
+                resultsDisplay.innerHTML = message;
+
+                // Add "Try Again" button dynamically if not already present and timer is running
+                let retryButton = document.getElementById('retry-button');
+                if (!retryButton) {
+                    retryButton = document.createElement('button');
+                    retryButton.textContent = "Try Again";
+                    retryButton.classList.add('action-button');
+                    retryButton.id = 'retry-button';
+                    retryButton.onclick = resetQuizForRetry;
+                    resultsDisplay.appendChild(retryButton);
+                } else {
+                     retryButton.style.display = 'block'; // Ensure it's visible if already exists
+                }
+
+            } else {
+                // Review delay is over
+                clearInterval(reviewDelayTimerInterval);
+                timerDisplay.innerText = "⏱️ Time's Up!";
+                message += `<p>Answers are now available for review.</p>`;
+                resultsDisplay.innerHTML = message;
+                reviewAnswersButton.style.display = 'block'; // Show review button
+                document.getElementById('retry-button')?.remove(); // Remove try again button
+
+                // Announce that review is available for screen readers
+                resultsDisplay.setAttribute('role', 'alert');
+                setTimeout(() => {
+                    resultsDisplay.removeAttribute('role');
+                }, 1000);
+            }
+            resultsDisplay.style.display = 'block'; // Ensure results are visible
+            timerDisplay.innerText = `⏱️ Time Remaining for Review: ${formatTime(timeRemainingForReviewDelay)}`; // Update timer in top right
+            saveProgress(); // Save delay timer state
+            timeRemainingForReviewDelay--;
+
+        }, 1000);
+    }
+
+    function resetQuizForRetry() {
+        // This function is for retrying *during* the 40-minute review delay
+        // It does NOT reset the 40-minute review delay timer.
+        clearInterval(quizTimerInterval); // Ensure current quiz timer is stopped
+
+        userSelections = {}; // Clear previous selections for a fresh attempt
+        document.querySelectorAll('input[type="radio"]').forEach(el => {
+            el.checked = false;
+            el.closest('label').classList.remove('correct', 'incorrect', 'selected');
+        });
+
+        resultsDisplay.style.display = 'none'; // Hide the score message temporarily
+        document.getElementById('retry-button')?.remove(); // Remove the try again button
+
+        quizForm.style.display = 'block'; // Show the quiz form again
+        timerDisplay.style.display = 'block'; // Keep timer visible (it will show quiz timer)
+
+        timeRemainingForQuiz = QUIZ_DURATION_SECONDS; // Reset quiz timer for this new attempt
+        timerDisplay.innerText = `⏱️ Time Remaining: ${formatTime(timeRemainingForQuiz)}`;
+        startQuizTimer(); // Restart the 10-minute quiz timer
+    }
+
+
+    function resetFullQuizSession() {
+        // This function resets everything for a brand new quiz session
+        clearInterval(quizTimerInterval);
+        clearInterval(reviewDelayTimerInterval);
+        localStorage.removeItem('quizProgress'); // Clear saved progress for a clean start
+
+        // Clear all selected radio buttons and remove any previous feedback styles
+        document.querySelectorAll('input[type="radio"]').forEach(el => {
+            el.checked = false;
+            el.closest('label').classList.remove('correct', 'incorrect', 'selected');
+        });
+
+        resultsDisplay.innerHTML = ""; // Clear previous results content
+        resultsDisplay.style.display = 'none';
+        reviewAnswersButton.style.display = 'none';
+        document.getElementById('retry-button')?.remove(); // Ensure retry button is gone
+
+        timeRemainingForQuiz = QUIZ_DURATION_SECONDS;
+        timeRemainingForReviewDelay = REVIEW_DELAY_SECONDS;
+        currentAttempt = 1;
+        userSelections = {};
+        lastSubmittedScore = 0;
+
+        timerDisplay.innerText = `⏱️ Time Remaining: ${formatTime(QUIZ_DURATION_SECONDS)}`; // Initial display for reset
+        introSection.style.display = 'block'; // Go back to intro
+        quizForm.style.display = 'none';
+        timerDisplay.style.display = 'none';
+    }
+
+
+    /**
+     * Submits the quiz, calculates score, and initiates the answer review delay.
+     * @param {boolean} autoSubmitted - True if the quiz was submitted automatically due to time running out.
+     */
+    function submitQuiz(autoSubmitted = false) {
+        clearInterval(quizTimerInterval); // Stop the 10-minute quiz timer
+
+        let score = 0;
+        const currentAttemptSelections = {};
+
+        // Calculate score and store user selections for THIS attempt
+        for (let i = 1; i <= TOTAL_QUESTIONS; i++) {
+            const questionName = `q${i}`;
+            const questionData = QUIZ_DATA[questionName];
+            if (!questionData) {
+                console.warn(`Warning: Missing QUIZ_DATA for ${questionName}`);
+                continue;
+            }
+
+            const selectedOption = document.querySelector(`input[name="${questionName}"]:checked`);
+
+            if (selectedOption) {
+                currentAttemptSelections[questionName] = selectedOption.value;
+                if (selectedOption.value === questionData.answer) {
+                    score++;
+                }
+            } else {
+                currentAttemptSelections[questionName] = null; // Mark as not answered
+            }
+
+            // Remove any active quiz state visual feedback (selected, correct, incorrect)
+            document.querySelectorAll(`input[name="${questionName}"]`).forEach(input => {
+                const label = input.closest('label');
+                if (label) {
+                    label.classList.remove('selected', 'correct', 'incorrect');
+                }
+            });
+        }
+
+        userSelections = currentAttemptSelections; // Save current submission choices globally
+        lastSubmittedScore = score; // Update the last submitted score
+        currentAttempt++; // Increment attempt counter
+
+        const percent = (score / TOTAL_QUESTIONS) * 100;
+        let initialMessage = `✅ Your quiz has been ${autoSubmitted ? 'automatically submitted' : 'submitted'}.`;
+        initialMessage += `\nYou scored **${score}** out of **${TOTAL_QUESTIONS}** (${percent.toFixed(1)}%).`;
+
+        // Store score in a data attribute for retrieval by review timer
+        resultsDisplay.dataset.score = score;
+        resultsDisplay.innerHTML = `<p>${initialMessage}</p>`;
+        resultsDisplay.style.display = 'block';
+        quizForm.style.display = 'none'; // Hide the quiz form
+
+        saveProgress(); // Save progress after submission
+
+        // If the review delay timer isn't already running, start it
+        // This ensures it only starts once after the *first* submission.
+        if (reviewDelayTimerInterval === undefined || reviewDelayTimerInterval === null) {
+            startReviewDelayTimer();
+        } else {
+             // If it's already running, just update the display for the current score.
+             // The startReviewDelayTimer will pick up the lastSubmittedScore.
+             resultsDisplay.innerHTML = `<p>${initialMessage}</p>
+                                         <p>Review answers available in: <strong>${formatTime(timeRemainingForReviewDelay)}</strong></p>`;
+        }
+
+
+        // Add "Try Again" button only if the overall delay timer isn't done
+        if (timeRemainingForReviewDelay > 0) {
+            const tryAgainBtn = document.createElement('button');
+            tryAgainBtn.textContent = "Try Again (Attempt #" + currentAttempt + ")"; // Indicate attempt number
+            tryAgainBtn.classList.add('action-button');
+            tryAgainBtn.id = 'retry-button';
+            tryAgainBtn.onclick = resetQuizForRetry;
+            resultsDisplay.appendChild(tryAgainBtn);
+        }
+
+
+        // Announce initial submission result for screen readers
+        resultsDisplay.setAttribute('role', 'alert');
+        setTimeout(() => {
+            resultsDisplay.removeAttribute('role');
+        }, 1000);
+    }
+
+    /**
+     * Displays the full results with correct answers, user's answers, and per-question feedback.
+     */
+    function showFullResults() {
+        clearInterval(quizTimerInterval); // Ensure quiz timer is stopped
+        clearInterval(reviewDelayTimerInterval); // Stop the overall countdown timer
+
+        let fullResultsHTML = `<h2>Quiz Results Review</h2>
+                                <p>You scored <strong>${lastSubmittedScore}</strong> out of <strong>${TOTAL_QUESTIONS}</strong>.</p>
+                                <h3>Performance by Concept:</h3>`;
+
+        const conceptScores = {};
+        const conceptTotals = {};
+        const incorrectQuestionsDetails = [];
+        const notAttemptedQuestions = [];
+
+        ALL_CONCEPTS.forEach(concept => {
+            conceptScores[concept] = 0;
+            conceptTotals[concept] = 0;
+        });
+
+        for (let i = 1; i <= TOTAL_QUESTIONS; i++) {
+            const questionName = `q${i}`;
+            const questionData = QUIZ_DATA[questionName];
+            if (!questionData) {
+                console.warn(`Warning: Missing QUIZ_DATA for ${questionName} during review.`);
+                continue;
+            }
+
+            const questionConcept = questionData.concept;
+            const correctAnswer = questionData.answer;
+            const feedback = questionData.feedback;
+
+            const questionElement = document.querySelector(`.question p[data-q="${i}"]`);
+            if (!questionElement) {
+                console.warn(`Warning: Missing HTML element for question ${questionName}.`);
+                continue;
+            }
+
+            const correctAnswerRadio = document.querySelector(`input[name="${questionName}"][value="${correctAnswer}"]`);
+            if (!correctAnswerRadio) {
+                console.warn(`Warning: Missing correct answer radio button for question ${questionName}.`);
+                continue;
+            }
+
+            const questionText = questionElement.textContent.trim();
+
+            const userAnswer = userSelections[questionName];
+            const isCorrect = (userAnswer === correctAnswer);
+
+            conceptTotals[questionConcept]++;
+
+            const getLabelText = (qName, value) => {
+                const radio = document.querySelector(`input[name="${qName}"][value="${value}"]`);
+                return radio && radio.closest('label') ? radio.closest('label').textContent.trim() : 'N/A';
+            };
+
+
+            if (userAnswer === null) {
+                notAttemptedQuestions.push({ qNum: i, qText: questionText, correctAnswer: getLabelText(questionName, correctAnswer) });
+                incorrectQuestionsDetails.push({
+                    qNum: i,
+                    qText: questionText,
+                    userAnswer: "Not Answered",
+                    correctAnswer: getLabelText(questionName, correctAnswer),
+                    feedback: feedback
+                });
+            } else if (isCorrect) {
+                conceptScores[questionConcept]++;
+            } else {
+                incorrectQuestionsDetails.push({
+                    qNum: i,
+                    qText: questionText,
+                    userAnswer: getLabelText(questionName, userAnswer),
+                    correctAnswer: getLabelText(questionName, correctAnswer),
+                    feedback: feedback
+                });
+            }
+        }
+
+        // Display % per concept category
+        ALL_CONCEPTS.forEach(concept => {
+            const score = conceptScores[concept];
+            const total = conceptTotals[concept];
+            const percent = total > 0 ? (score / total) * 100 : 0;
+            fullResultsHTML += `<p><strong>${concept}:</strong> ${score} / ${total} (${percent.toFixed(1)}%)</p>`;
+        });
+
+        // Display Not Attempted Questions
+        if (notAttemptedQuestions.length > 0) {
+            fullResultsHTML += `<h3>Questions Not Attempted:</h3>`;
+            notAttemptedQuestions.forEach(item => {
+                fullResultsHTML += `
+                    <div class="review-item not-attempted">
+                        <p class="review-question">Q${item.qNum}: ${item.qText}</p>
+                        <p class="review-answer">Correct Answer: <strong class="text-success">${item.correctAnswer}</strong></p>
+                    </div>`;
+            });
+        }
+
+        // Display Detailed Review for Incorrect Questions
+        if (incorrectQuestionsDetails.length > 0) {
+            fullResultsHTML += `<h3>Detailed Review of Incorrect/Unattempted Questions:</h3>`;
+            incorrectQuestionsDetails.forEach(item => {
+                fullResultsHTML += `
+                    <div class="review-item ${item.userAnswer === "Not Answered" ? 'not-answered-feedback' : 'incorrect-feedback'}">
+                        <p class="review-question">Q${item.qNum}: ${item.qText}</p>
+                        <p class="review-answer user-choice">Your Answer: <strong class="${item.userAnswer === "Not Answered" ? 'text-muted' : 'text-danger'}">${item.userAnswer}</strong> ❌</p>
+                        <p class="review-answer correct-answer">Correct Answer: <strong class="text-success">${item.correctAnswer}</strong></p>
+                        <p class="feedback-text">💡 ${item.feedback}</p>
+                    </div>
+                `;
+            });
+        } else {
+            fullResultsHTML += `<p>🎉 Excellent! You answered all questions correctly!</p>`;
+        }
+
+        fullResultsHTML += `<button id="start-new-quiz-button" class="action-button">Start New Quiz</button>`;
+
+        resultsDisplay.innerHTML = fullResultsHTML;
+        resultsDisplay.setAttribute('role', 'alert');
+        setTimeout(() => {
+            resultsDisplay.removeAttribute('role');
+        }, 1000);
+
+        document.getElementById('start-new-quiz-button').addEventListener('click', () => {
+            resetFullQuizSession(); // This button now triggers a full reset to start a brand new quiz
+        });
+    }
+
+    // --- Event Listeners and Initial Setup ---
+
+    startQuizButton.addEventListener('click', beginQuiz);
+    submitQuizButton.addEventListener('click', () => submitQuiz(false)); // Not auto-submitted
+    reviewAnswersButton.addEventListener('click', showFullResults);
+
+    document.addEventListener('DOMContentLoaded', () => {
+        if (!loadProgress()) {
+            introSection.style.display = 'block';
+            quizForm.style.display = 'none';
+            timerDisplay.style.display = 'none';
+            resultsDisplay.style.display = 'none';
+        }
+
+        document.querySelectorAll('input[type="radio"]').forEach(radio => {
+            radio.addEventListener('change', (event) => {
+                const name = event.target.name;
+                document.querySelectorAll(`input[name="${name}"]`).forEach(siblingRadio => {
+                    const label = siblingRadio.closest('label');
+                    if (label) {
+                        label.classList.remove('selected', 'correct', 'incorrect');
+                    }
+                });
+                const selectedLabel = event.target.closest('label');
+                if (selectedLabel) {
+                    selectedLabel.classList.add('selected');
+                }
+            });
+        });
+    });
+</script>
+
+</body>
+</html>
