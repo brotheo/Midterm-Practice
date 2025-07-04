@@ -720,7 +720,7 @@ label.incorrect {
     // Extract all concepts dynamically
     const ALL_CONCEPTS = [...new Set(Object.values(QUIZ_DATA).map(data => data.concept))];
     const TOTAL_QUESTIONS = Object.keys(QUIZ_DATA).length;
-    const QUIZ_DURATION_SECONDS = 10 * 60; // 10 minutes for the quiz itself
+    const QUIZ_DURATION_SECONDS = 40 * 60; // 10 minutes for the quiz itself
     const REVIEW_DELAY_SECONDS = 40 * 60; // 40 minutes delay for answer review *after* quiz submission
 
     let quizTimerInterval;
